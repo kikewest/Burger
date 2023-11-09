@@ -74,6 +74,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE productos");
         db.execSQL("DROP TABLE incidencias");
         db.execSQL("DROP TABLE repartidor");
+        db.execSQL("DROP TABLE tiene");
         onCreate(db);
     }
 }
