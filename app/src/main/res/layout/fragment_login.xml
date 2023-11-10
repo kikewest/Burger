@@ -40,15 +40,5 @@
             android:textColorHint="@color/aqua"
             android:textColor="@color/aqua"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/iniciar"
-            android:layout_width="300dp"
-            android:layout_height="1dp"
-            android:layout_weight="0.09"
-            android:background="@drawable/boton"
-            android:gravity="center"
-            android:text="Iniciar Sesión"
-            android:textColor="@color/aqua"/>
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

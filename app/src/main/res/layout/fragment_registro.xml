@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondotranssinicono"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -91,22 +90,5 @@
             app:layout_constraintStart_toStartOf="parent"
             android:textColorHint="@color/aqua"
             android:textColor="@color/aqua" />
-
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/boton"
-            android:gravity="center"
-            android:text="Crear Cuenta"
-            android:textColor="@color/aqua"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTexcontrasenia"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

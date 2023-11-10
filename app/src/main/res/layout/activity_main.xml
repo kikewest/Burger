@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondosintrans"
@@ -57,9 +58,9 @@
                 android:id="@+id/iniciar"
                 android:layout_width="300dp"
                 android:layout_height="1dp"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@drawable/boton"
-                android:layout_gravity="center"
                 android:text="Iniciar Sesión"
                 android:textColor="@color/aqua" />
 
