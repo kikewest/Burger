@@ -1,6 +1,7 @@
 package com.example.burger;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -77,4 +78,19 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE tiene");
         onCreate(db);
     }
+    public boolean authenticateUser(String username, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {"idUsuario"};
+        String selection = "nombre=? AND contrasenia=?";
+        String[] selectionArgs = {username, password};
+
+        Cursor cursor = db.query(TABLE_CLIENTES, columns, selection, selectionArgs, null, null, null);
+
+        int count = cursor.getCount();
+        cursor.close();
+        db.close();
+
+        return count > 0;
+    }
+
 }
