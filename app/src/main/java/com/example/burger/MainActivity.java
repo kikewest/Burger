@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements LoginFragment.LoginListener {
+public class MainActivity extends AppCompatActivity implements LoginFragment.LoginListener  {
 
     FragmentTransaction transaction;
 
@@ -34,11 +34,17 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
 
         btncrear.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragmentContainerView, fragmentRegistro);
                 transaction.addToBackStack(null);
                 transaction.commit();
+                // Cambia la imagen de fondo al fragmento Registro
+                ConstraintLayout mainLayout = findViewById(R.id.activity_main_layout);
+                mainLayout.setBackgroundResource(R.drawable.fondotranssinicono);
 
+                // Actualiza el estado al fragmento Registro
+                currentFragment = 2;
             }
         });
 
