@@ -7,10 +7,11 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_width="300dp"
+        android:layout_height="358dp"
+        android:layout_marginHorizontal="65dp"
         android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,11 +21,12 @@
             android:id="@+id/editTextTextnombre"
             android:layout_width="272dp"
             android:layout_height="61dp"
-            android:layout_marginTop="16dp"
+            android:background="#BF000000"
             android:ems="10"
             android:hint="Nombre"
             android:inputType="textPersonName"
             android:minHeight="48dp"
+            android:textAlignment="center"
             android:textColor="@color/aqua"
             android:textColorHint="@color/aqua"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,59 +38,69 @@
             android:layout_width="272dp"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
+            android:background="#BF000000"
             android:ems="10"
             android:hint="Correo"
             android:inputType="textEmailAddress"
             android:minHeight="48dp"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextnombre"
+            android:textAlignment="center"
+            android:textColor="@color/aqua"
+            android:textColorHint="@color/aqua"
+            android:textDirection="firstStrongRtl"
+            android:textIsSelectable="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:textColorHint="@color/aqua"
-            android:textColor="@color/aqua" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextnombre" />
 
         <EditText
             android:id="@+id/editTextTexDireccion"
             android:layout_width="272dp"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
+            android:background="#BF000000"
             android:ems="10"
             android:hint="Dirección"
             android:inputType="textPostalAddress"
             android:minHeight="48dp"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTexcorreo"
+            android:textAlignment="center"
+            android:textColor="@color/aqua"
+            android:textColorHint="@color/aqua"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:textColorHint="@color/aqua"
-            android:textColor="@color/aqua" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextTexcorreo" />
 
         <EditText
             android:id="@+id/editTextTexTelefono"
             android:layout_width="272dp"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
+            android:background="#BF000000"
             android:ems="10"
             android:hint="Telefono"
             android:inputType="number"
             android:minHeight="48dp"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTexDireccion"
+            android:textAlignment="center"
+            android:textColor="@color/aqua"
+            android:textColorHint="@color/aqua"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:textColorHint="@color/aqua"
-            android:textColor="@color/aqua" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextTexDireccion" />
 
         <EditText
             android:id="@+id/editTextTexcontrasenia"
             android:layout_width="272dp"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
+            android:background="#BF000000"
             android:ems="10"
             android:hint="Contraseña"
             android:inputType="textPassword"
             android:minHeight="48dp"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTexdni"
+            android:textAlignment="center"
+            android:textColor="@color/aqua"
+            android:textColorHint="@color/aqua"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:textColorHint="@color/aqua"
-            android:textColor="@color/aqua" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextTexdni" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

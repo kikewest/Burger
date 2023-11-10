@@ -16,8 +16,8 @@ import android.widget.Toast;
 
 import java.io.File;
 
-public class MainActivity extends AppCompatActivity implements LoginFragment.LoginListener  {
-
+public class MainActivity extends AppCompatActivity  {
+    DbHelper dbHelper;
     FragmentTransaction transaction;
 
     Fragment fragmentLogin, fragmentInicio, fragmentRegistro;
@@ -26,9 +26,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DbHelper dbhelper = new DbHelper(MainActivity.this);
-        SQLiteDatabase db = dbhelper.getWritableDatabase();
-        File archivo = new File("/data/data/com.example.burger/databases/Burger.db");
+        dbHelper = new DbHelper(MainActivity.this);
         fragmentInicio = new inicioFragment();
         fragmentLogin = new LoginFragment();
         fragmentRegistro = new registroFragment();
@@ -45,8 +43,8 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
                 transaction.addToBackStack(null);
                 transaction.commit();
                 // Cambia la imagen de fondo al fragmento Registro
-                ConstraintLayout mainLayout = findViewById(R.id.activity_main_layout);
-                mainLayout.setBackgroundResource(R.drawable.fondotranssinicono);
+                //ConstraintLayout mainLayout = findViewById(R.id.activity_main_layout);
+               // mainLayout.setBackgroundResource(R.drawable.fondotranssinicono);
 
                 // Actualiza el estado al fragmento Registro
                 currentFragment = 2;
@@ -63,8 +61,8 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
                 }
                 // Cambia la imagen de fondo al fragmento 2
                 // Cambia la imagen de fondo del ConstraintLayout al fragmento 2
-                ConstraintLayout mainLayout = findViewById(R.id.activity_main_layout);
-                mainLayout.setBackgroundResource(R.drawable.fondotranssinicono);
+                //ConstraintLayout mainLayout = findViewById(R.id.activity_main_layout);
+               // mainLayout.setBackgroundResource(R.drawable.fondotranssinicono);
 
                 currentFragment = 2; // Actualiza el estado al fragmento 2
             }
@@ -75,15 +73,5 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.transparente)); // Reemplaza R.color.colorTransparent con tu color deseado
         }
-    }
-    @Override
-    public void onLogin(String username, String password) {
-        // Aquí puedes manejar los datos de usuario y contraseña que se recopilaron.
-        // Puedes realizar la lógica de autenticación o cualquier acción necesaria aquí.
-
-        // Ejemplo: muestra los datos de usuario y contraseña en un Toast.
-        Toast.makeText(this, "Usuario: " + username + "\nContraseña: " + password, Toast.LENGTH_SHORT).show();
-
-        // También puedes realizar la autenticación aquí y llevar a cabo la lógica correspondiente.
     }
 }

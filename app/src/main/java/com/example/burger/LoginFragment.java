@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
-import android.view.SurfaceControl;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,7 +17,6 @@ public class LoginFragment extends Fragment {
     FragmentTransaction transaction;
     private EditText editTextUsuario;
     private EditText editTextContraseña;
-    private LoginListener loginListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,17 +47,26 @@ public class LoginFragment extends Fragment {
                 String password = editTextContraseña.getText().toString();
 
                 // Verifica si los campos de usuario y contraseña no están vacíos
+                // Verifica si los campos de usuario y contraseña no están vacíos
                 if (!username.isEmpty() && !password.isEmpty()) {
                     // Realiza la autenticación aquí según tus necesidades
-                    if (authenticateUser(username, password)) {
-                        Toast.makeText(requireContext(), "Has iniciado sesion.", Toast.LENGTH_SHORT).show();
-                        // Si la autenticación es exitosa, navega al fragmento de inicio
+                    boolean isAuthenticated = authenticateUser(username, password);
+
+                    if (isAuthenticated) {
+                        // Si la autenticación es exitosa, muestra el mensaje según si es administrador o no
+                        if (isUserAdmin(username)) {
+                            showToast("Bienvenido "+ username);
+                        } else {
+                            showToast("Bienvenido "+username);
+                        }
+
+                        // Navega al fragmento de inicio
                         navigateToInicioFragment();
                     } else {
-                        Toast.makeText(requireContext(), "Autenticación fallida. Verifique sus credenciales.", Toast.LENGTH_SHORT).show();
+                        showToast("Autenticación fallida. Verifique sus credenciales.");
                     }
                 } else {
-                    Toast.makeText(requireContext(), "Por favor, ingrese usuario y contraseña", Toast.LENGTH_SHORT).show();
+                    showToast("Por favor, ingrese usuario y contraseña");
                 }
             }
         });
@@ -75,6 +83,16 @@ public class LoginFragment extends Fragment {
 
         return isAuthenticated;
     }
+    private boolean isUserAdmin(String username) {
+        DbHelper dbHelper = new DbHelper(requireContext());
+
+        try {
+            boolean isAdmin = dbHelper.isUserAdmin(username);
+            return isAdmin;
+        } finally {
+            dbHelper.close();
+        }
+    }
 
     // Método para navegar al fragmento de inicio
     private void navigateToInicioFragment() {
@@ -84,8 +102,7 @@ public class LoginFragment extends Fragment {
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
-    public interface LoginListener {
-        void onLogin(String username, String password);
+    private void showToast(String message) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
     }
 }
