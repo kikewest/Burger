@@ -10,13 +10,17 @@
     </size>
 
     <corners
-        android:radius="25dp">
+        android:radius="250dp">
 
     </corners>
 
     <stroke
         android:width="10px"
         android:color="@color/aqua">
-
     </stroke>
+
+    <solid
+        android:color="#BF000000">
+
+    </solid>
 </shape>
