@@ -7,11 +7,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity implements LoginFragment.LoginListener  {
 
@@ -23,7 +26,9 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        DbHelper dbhelper = new DbHelper(MainActivity.this);
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+        File archivo = new File("/data/data/com.example.burger/databases/Burger.db");
         fragmentInicio = new inicioFragment();
         fragmentLogin = new LoginFragment();
         fragmentRegistro = new registroFragment();

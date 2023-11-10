@@ -1,5 +1,7 @@
 package com.example.burger;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,13 +16,13 @@ import android.widget.Toast;
 
 
 public class registroFragment extends Fragment {
-
+    private DbHelper dbHelper;
     FragmentTransaction transaction;
     private EditText editTextNombre;
     private EditText editTextCorreo;
     private EditText editTextDireccion;
-    private EditText editTextDni;
-    private EditText editTextContraseña;
+    private EditText editTextTelefono;
+    private EditText editTextContrasenia;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -29,23 +31,44 @@ public class registroFragment extends Fragment {
         editTextNombre = view.findViewById(R.id.editTextTextnombre);
         editTextCorreo = view.findViewById(R.id.editTextTexcorreo);
         editTextDireccion = view.findViewById(R.id.editTextTexDireccion);
-        editTextDni = view.findViewById(R.id.editTextTexdni);
-        editTextContraseña = view.findViewById(R.id.editTextTexcontrasenia);
+        editTextTelefono = view.findViewById(R.id.editTextTexTelefono);
+        editTextContrasenia = view.findViewById(R.id.editTextTexcontrasenia);
         Button btnIniciar = requireActivity().findViewById(R.id.iniciar);
         Button btnCrear = requireActivity().findViewById(R.id.crear);
 
         btnCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Nombre= editTextNombre.getText().toString();
-                String Correo= editTextCorreo.getText().toString();
-                String Direccion= editTextDireccion.getText().toString();
-                String Dni= editTextDni.getText().toString();
-                String Contraseña= editTextContraseña.getText().toString();
-                if (Nombre != null && Correo != null && Direccion!=null && Dni!=null && Contraseña!=null) {
-                    String message = "Datos recogidos: Usuario - " + Nombre + ", Correo - " + Correo;
-                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+                String nombre = editTextNombre.getText().toString();
+                String correo = editTextCorreo.getText().toString();
+                String domicilio = editTextDireccion.getText().toString();
+                String telefono = editTextTelefono.getText().toString();
+                String contrasenia = editTextContrasenia.getText().toString();
+                // Crea una instancia de DbHelper
+                dbHelper = new DbHelper(getActivity());
+
+                // Obtén una referencia a la base de datos para escritura
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+                // Crea un objeto ContentValues para insertar los datos
+                ContentValues values = new ContentValues();
+                values.put("nombre", nombre);
+                values.put("correo", correo);
+                values.put("domicilio", domicilio);
+                values.put("telefono", telefono);
+                values.put("contraseña", contrasenia);
+                // Inserta los valores en la tabla "usuarios"
+                long newRowId = db.insert("clientes", null, values);
+
+                // Verifica si la inserción fue exitosa
+                if (newRowId != -1) {
+                    Toast.makeText(getContext(), "Datos insertados correctamente", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Error al insertar datos", Toast.LENGTH_SHORT).show();
                 }
+
+                // Cierra la base de datos
+                db.close();
             }
         });
         btnIniciar.setOnClickListener(new View.OnClickListener() {
