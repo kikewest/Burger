@@ -25,9 +25,14 @@ public class registroFragment extends Fragment {
         editTextDireccion = view.findViewById(R.id.editTextTexDireccion);
         editTextTelefono = view.findViewById(R.id.editTextTexTelefono);
         editTextContrasenia = view.findViewById(R.id.editTextTexcontrasenia);
-
+        Button btniniciar = requireActivity().findViewById(R.id.iniciar);
         Button btnCrear = requireActivity().findViewById(R.id.crear);
-
+        btniniciar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
         btnCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
