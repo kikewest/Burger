@@ -3,8 +3,10 @@ package com.example.burger;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
+import android.view.SurfaceControl;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -13,7 +15,7 @@ import android.widget.Toast;
 
 
 public class LoginFragment extends Fragment {
-
+    FragmentTransaction transaction;
     private EditText editTextUsuario;
     private EditText editTextContraseña;
     private LoginListener loginListener;
@@ -28,6 +30,17 @@ public class LoginFragment extends Fragment {
 
         // Configura el OnClickListener para el botón de inicio de sesión.
         Button btnIniciarSesion = requireActivity().findViewById(R.id.iniciar);
+        Button btnCrear = requireActivity().findViewById(R.id.crear);
+
+        btnCrear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragmentContainerView,new registroFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
         btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

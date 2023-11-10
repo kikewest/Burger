@@ -7,13 +7,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements LoginFragment.LoginListener {
+import java.io.File;
+
+public class MainActivity extends AppCompatActivity implements LoginFragment.LoginListener  {
 
     FragmentTransaction transaction;
 
@@ -23,7 +26,9 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        DbHelper dbhelper = new DbHelper(MainActivity.this);
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+        File archivo = new File("/data/data/com.example.burger/databases/Burger.db");
         fragmentInicio = new inicioFragment();
         fragmentLogin = new LoginFragment();
         fragmentRegistro = new registroFragment();
@@ -34,11 +39,17 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
 
         btncrear.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragmentContainerView, fragmentRegistro);
                 transaction.addToBackStack(null);
                 transaction.commit();
+                // Cambia la imagen de fondo al fragmento Registro
+                ConstraintLayout mainLayout = findViewById(R.id.activity_main_layout);
+                mainLayout.setBackgroundResource(R.drawable.fondotranssinicono);
 
+                // Actualiza el estado al fragmento Registro
+                currentFragment = 2;
             }
         });
 
