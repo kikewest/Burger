@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class registroFragment extends Fragment {
+    FragmentTransaction transaction;
     private DbHelper dbHelper;
     private EditText editTextNombre, editTextCorreo, editTextDireccion, editTextTelefono, editTextContrasenia;
 
@@ -25,9 +28,17 @@ public class registroFragment extends Fragment {
         editTextDireccion = view.findViewById(R.id.editTextTexDireccion);
         editTextTelefono = view.findViewById(R.id.editTextTexTelefono);
         editTextContrasenia = view.findViewById(R.id.editTextTexcontrasenia);
-
+        Button btniniciar = requireActivity().findViewById(R.id.iniciar);
         Button btnCrear = requireActivity().findViewById(R.id.crear);
-
+        btniniciar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragmentContainerView, new LoginFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
         btnCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
