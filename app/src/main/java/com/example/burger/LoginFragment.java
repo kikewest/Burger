@@ -1,5 +1,6 @@
 package com.example.burger;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -58,6 +59,8 @@ public class LoginFragment extends Fragment {
                             showToast("Bienvenido "+ username);
                         } else {
                             showToast("Bienvenido "+username);
+                            Intent intent = new Intent(requireActivity(), menuActivity.class);
+                            startActivity(intent);
                         }
 
                         // Navega al fragmento de inicio
