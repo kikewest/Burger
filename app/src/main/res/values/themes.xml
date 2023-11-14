@@ -9,9 +9,9 @@
 
     <style name="BottomNavigation">
 
-        <item name="android:background">@color/aqua</item>
-        <item name="itemIconTint">@color/black</item>
-        <item name="itemTextColor">@color/white</item>
+        <item name="android:background">#E4000000</item>
+        <item name="itemIconTint">@color/aqua</item>
+        <item name="itemTextColor">@color/aqua</item>
 
     </style>
 </resources>
