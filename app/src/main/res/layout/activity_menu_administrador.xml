@@ -5,16 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".menuActivity">
+    tools:context=".menu_administrador">
 
     <FrameLayout
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottom_navigation"/>
+        android:layout_above="@id/menu_administrador"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+        android:id="@+id/menu_administrador"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -23,7 +23,7 @@
         android:elevation="8dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        app:menu="@menu/bottom_navigation"
+        app:menu="@menu/menu_administrador"
         app:labelVisibilityMode="selected"
         style="@style/BottomNavigation"/>
 </RelativeLayout>

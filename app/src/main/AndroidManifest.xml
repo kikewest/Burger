@@ -29,6 +29,16 @@
             android:name=".inicio"
             android:screenOrientation="fullSensor"
             />
+        <activity
+            android:name=".menuActivity"
+            android:label="Menu Activity">
+            <!-- Puedes agregar más configuraciones según tus necesidades -->
+        </activity>
+        <activity
+            android:name=".menu_administrador"
+            android:label="Menu administrador">
+            <!-- Puedes agregar más configuraciones según tus necesidades -->
+        </activity>
 
     </application>
 
