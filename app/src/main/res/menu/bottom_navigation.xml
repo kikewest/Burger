@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/firstFragment"
-        android:icon="@drawable/logoconnombrepng"
+        android:icon="@drawable/baseline_home_24"
         android:title="Primero"/>
     <item
         android:id="@+id/secondFragment"
-        android:icon="@android:drawable/ic_input_delete"
+        android:icon="@drawable/baseline_shopping_cart_24"
         android:title="Segundo"/>
     <item
         android:id="@+id/thirdFragment"
-        android:icon="@android:drawable/ic_lock_idle_alarm"
+        android:icon="@drawable/baseline_person_24"
         android:title="Tercero"/>
 
 

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UsuarioFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/iniciar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="120dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/boton"
+                android:text="Añadir"
+                android:textColor="@color/aqua" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/modifica"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/boton"
+                android:text="Modificar"
+                android:textColor="@color/aqua" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/eliminar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/boton"
+                android:text="Eliminar"
+                android:textColor="@color/aqua" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/listar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/boton"
+                android:text="Listar"
+                android:textColor="@color/aqua" />
+        </LinearLayout>
+
+    </FrameLayout>
+

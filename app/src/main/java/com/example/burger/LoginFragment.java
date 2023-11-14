@@ -57,6 +57,8 @@ public class LoginFragment extends Fragment {
                         // Si la autenticación es exitosa, muestra el mensaje según si es administrador o no
                         if (isUserAdmin(username)) {
                             showToast("Bienvenido "+ username);
+                            Intent intent = new Intent(requireActivity(), menu_administrador.class);
+                            startActivity(intent);
                         } else {
                             showToast("Bienvenido "+username);
                             Intent intent = new Intent(requireActivity(), menuActivity.class);
