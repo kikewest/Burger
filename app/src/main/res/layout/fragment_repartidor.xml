@@ -12,7 +12,7 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/iniciar"
+                android:id="@+id/anadirRepartidor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -23,7 +23,7 @@
                 android:textColor="@color/aqua" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/modifica"
+                android:id="@+id/modificarRepartidor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -34,7 +34,7 @@
                 android:textColor="@color/aqua" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/eliminar"
+                android:id="@+id/eliminarRepartidor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -45,7 +45,7 @@
                 android:textColor="@color/aqua" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/listar"
+                android:id="@+id/mostrarRepartidor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

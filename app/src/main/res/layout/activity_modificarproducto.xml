@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#E4000000"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="MODIFICAR PRODUCTO"
+            android:gravity="center"
+            android:textColor="@color/aqua"
+            android:textSize="35dp" />
+    </LinearLayout>
+    <ScrollView
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="5dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ModificarNombreTexto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Introduce la ID a modificar"
+                android:gravity="center"
+                android:textSize="35dp" />
+
+            <EditText
+                android:id="@+id/ModificarID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:hint="ID"
+
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/NombreTexto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Introduce el nuevo nombre"
+                android:gravity="center"
+                android:textSize="35dp" />
+
+            <EditText
+                android:id="@+id/Nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:hint="Nombre"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/PrecioTexto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Introduce el nuevo precio"
+                android:gravity="center"
+                android:textSize="35dp" />
+
+            <EditText
+                android:id="@+id/Precio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:hint="Precio"
+                android:textSize="20dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/Modificar"
+            android:layout_width="178dp"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="20dp"
+            android:gravity="center"
+            android:text="Enviar"
+            android:background="#E4000000"
+            android:textColor="@color/aqua"
+            android:textSize="30dp" />
+
+    </LinearLayout>
+</LinearLayout>

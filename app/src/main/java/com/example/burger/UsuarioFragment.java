@@ -1,5 +1,6 @@
 package com.example.burger;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +61,41 @@ public class UsuarioFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_usuario, container, false);
+        View view = inflater.inflate(R.layout.fragment_usuario, container, false);
+
+        Button btnanadir = (Button) view.findViewById(R.id.anadirUsuario);
+        Button btnmodificar = (Button) view.findViewById(R.id.modificarUsuario);
+        Button btneliminar = (Button) view.findViewById(R.id.eliminarUsuario);
+        Button btnmostrar = (Button) view.findViewById(R.id.mostrarUsuario);
+
+
+
+        btnanadir.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(requireActivity(), anadirUsuarioActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnmodificar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(requireActivity(), modificarUsuarioActivity.class);
+                startActivity(intent);
+            }
+        });
+        btneliminar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(requireActivity(), eliminarUsuarioActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnmostrar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(requireActivity(), mostrarUsuarioActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        return view;
     }
 }
