@@ -29,6 +29,42 @@
             android:name=".inicio"
             android:screenOrientation="fullSensor"
             />
+        <activity
+            android:name=".menuActivity"
+            android:label="Menu Activity">
+            <!-- Puedes agregar más configuraciones según tus necesidades -->
+        </activity>
+        <activity
+            android:name=".menu_administrador"
+            android:label="Menu administrador">
+        </activity>
+        <activity android:name=".anadirProductoActivity">
+        </activity>
+        <activity android:name=".modificarProductoActivity">
+        </activity>
+        <activity android:name=".eliminarProductoActivity">
+        </activity>
+        <activity android:name=".mostrarProductoActivity">
+        </activity>
+
+        <activity android:name=".anadirUsuarioActivity">
+        </activity>
+        <activity android:name=".modificarUsuarioActivity">
+        </activity>
+        <activity android:name=".eliminarUsuarioActivity">
+        </activity>
+        <activity android:name=".mostrarUsuarioActivity">
+        </activity>
+
+        <activity android:name=".anadirRepartidorActivity">
+        </activity>
+        <activity android:name=".modificarRepartidorActivity">
+        </activity>
+        <activity android:name=".eliminarRepartidorActivity">
+        </activity>
+        <activity android:name=".mostrarRepartidorActivity">
+        </activity>
+
 
     </application>
 

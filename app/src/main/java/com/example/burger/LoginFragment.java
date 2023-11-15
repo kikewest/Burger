@@ -1,24 +1,23 @@
 package com.example.burger;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
-import android.view.SurfaceControl;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 public class LoginFragment extends Fragment {
     FragmentTransaction transaction;
     private EditText editTextUsuario;
     private EditText editTextContraseña;
-    private LoginListener loginListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,22 +35,43 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragmentContainerView,new registroFragment());
+                transaction.replace(R.id.fragmentContainerView, new registroFragment());
                 transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
+
         btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String username = editTextUsuario.getText().toString();
                 String password = editTextContraseña.getText().toString();
-                if (username != null && password != null) {
-                    String message = "Datos recogidos: Usuario - " + username + ", Contraseña - " + password;
-                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
-                }
-                if (loginListener != null) {
-                    loginListener.onLogin(username, password);
+
+                // Verifica si los campos de usuario y contraseña no están vacíos
+                // Verifica si los campos de usuario y contraseña no están vacíos
+                if (!username.isEmpty() && !password.isEmpty()) {
+                    // Realiza la autenticación aquí según tus necesidades
+                    boolean isAuthenticated = authenticateUser(username, password);
+
+                    if (isAuthenticated) {
+                        // Si la autenticación es exitosa, muestra el mensaje según si es administrador o no
+                        if (isUserAdmin(username)) {
+                            showToast("Bienvenido "+ username);
+                            Intent intent = new Intent(requireActivity(), menu_administrador.class);
+                            startActivity(intent);
+                        } else {
+                            showToast("Bienvenido "+username);
+                            Intent intent = new Intent(requireActivity(), menuActivity.class);
+                            startActivity(intent);
+                        }
+
+                        // Navega al fragmento de inicio
+                        navigateToInicioFragment();
+                    } else {
+                        showToast("Autenticación fallida. Verifique sus credenciales.");
+                    }
+                } else {
+                    showToast("Por favor, ingrese usuario y contraseña");
                 }
             }
         });
@@ -59,7 +79,35 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
-    public interface LoginListener {
-        void onLogin(String username, String password);
+    // Método para autenticar al usuario (simulado)
+    private boolean authenticateUser(String username, String password) {
+        // Aquí utilizamos el DbHelper para realizar la autenticación
+        DbHelper dbHelper = new DbHelper(requireContext());
+        boolean isAuthenticated = dbHelper.authenticateUser(username, password);
+        dbHelper.close();
+
+        return isAuthenticated;
+    }
+    private boolean isUserAdmin(String username) {
+        DbHelper dbHelper = new DbHelper(requireContext());
+
+        try {
+            boolean isAdmin = dbHelper.isUserAdmin(username);
+            return isAdmin;
+        } finally {
+            dbHelper.close();
+        }
+    }
+
+    // Método para navegar al fragmento de inicio
+    private void navigateToInicioFragment() {
+        // Aquí asumimos que tienes un contenedor llamado fragmentContainerView en tu actividad
+        transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragmentContainerView, new inicioFragment()); // Reemplaza con el nombre correcto del fragmento de inicio
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+    private void showToast(String message) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
     }
 }

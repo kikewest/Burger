@@ -1,6 +1,9 @@
 package com.example.burger;
 
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -66,6 +69,17 @@ public class DbHelper extends SQLiteOpenHelper {
                 "PRIMARY KEY (idPedido, idProducto)," + // Clave compuesta
                 "FOREIGN KEY (idPedido) REFERENCES " + TABLE_PEDIDOS + "(idPedido)," +
                 "FOREIGN KEY (idProducto) REFERENCES " + TABLE_PRODUCTOS + "(idProducto))");
+
+                // Insertar un cliente por defecto como administrador al crear la base de datos
+                ContentValues values = new ContentValues();
+                values.put("nombre", "Admin");
+                values.put("telefono", 123456789);
+                values.put("correo", "admin@example.com");
+                values.put("domicilio", "Dirección Admin");
+                values.put("contrasenia", "admin123");
+                values.put("administrador", 1); // 1 si es administrador
+
+        db.insert(TABLE_CLIENTES, null, values);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
@@ -77,4 +91,44 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE tiene");
         onCreate(db);
     }
+    public boolean authenticateUser(String username, String password) {
+        // Obtiene una referencia de solo lectura a la base de datos
+        SQLiteDatabase db = this.getReadableDatabase();
+        // Define las columnas que deseas recuperar en el resultado de la consulta
+        String[] columns = {"idUsuario"};
+        // Define la cláusula WHERE de la consulta/ Define la cláusula WHERE de la consulta
+        String selection = "nombre=? AND contrasenia=?";
+        // Especifica los valores a ser utilizados en la cláusula WHERE
+        String[] selectionArgs = {username, password};
+        // Realiza la consulta a la base de datos
+        Cursor cursor = db.query(TABLE_CLIENTES, columns, selection, selectionArgs, null, null, null);
+        // Obtiene el número de filas devueltas por la consulta
+        int count = cursor.getCount();
+        cursor.close();
+        db.close();
+
+        return count > 0;
+    }
+
+    @SuppressLint("Range")
+    public boolean isUserAdmin(String username) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {"administrador"};
+        String selection = "nombre=?";
+        String[] selectionArgs = {username};
+        Cursor cursor = db.query(TABLE_CLIENTES, columns, selection, selectionArgs, null, null, null);
+
+        boolean isAdmin = false;
+
+        if (cursor.moveToFirst()) {
+            isAdmin = cursor.getInt(cursor.getColumnIndex("administrador")) ==1;
+        }
+
+        cursor.close();
+        db.close();
+
+        return isAdmin;
+    }
+
+
 }
