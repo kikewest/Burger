@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity  {
 
         Button btncrear = findViewById(R.id.crear);
         Button btninicio = findViewById(R.id.iniciar);
+        Button btninvitado = findViewById(R.id.invitado);
 
         btncrear.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -73,5 +74,24 @@ public class MainActivity extends AppCompatActivity  {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.transparente)); // Reemplaza R.color.colorTransparent con tu color deseado
         }
+
+        btninvitado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Verificar si el usuario es un invitado (esto es un ejemplo, debes adaptarlo según tu lógica)
+                boolean esInvitado = true; // Cambia esto según tu lógica de autenticación
+
+                // Crear un Intent para abrir la actividad MenuActivity
+                Intent intent = new Intent(v.getContext(), menuActivity.class);
+
+                // Pasar la información de invitado a la siguiente actividad
+                intent.putExtra("ES_INVITADO", esInvitado);
+
+                // Iniciar la actividad MenuActivity
+                startActivity(intent);
+            }
+        });
+        
     }
+
 }
