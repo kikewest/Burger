@@ -65,32 +65,7 @@ public class ConexionFragment extends Fragment {
         AppCompatButton borrarBaseDatosBtn = view.findViewById(R.id.BorrarBaseDatos);
         AppCompatButton crearBaseDatosBtn = view.findViewById(R.id.CrearBaseDatos);
 
-        borrarBaseDatosBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                borrarBaseDatos();
-            }
-        });
-
-        crearBaseDatosBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                crearBaseDatos();
-            }
-        });
-
         return view;
     }
 
-    private void borrarBaseDatos() {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        dbHelper.onUpgrade(db, 0, 0);
-        db.close();
-    }
-
-    private void crearBaseDatos() {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        dbHelper.onCreate(db);
-        db.close();
-    }
 }

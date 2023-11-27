@@ -81,13 +81,16 @@ public class MainActivity extends AppCompatActivity  {
                 // Verificar si el usuario es un invitado (esto es un ejemplo, debes adaptarlo según tu lógica)
                 boolean esInvitado = true; // Cambia esto según tu lógica de autenticación
 
-                // Crear un Intent para abrir la actividad MenuActivity
-                Intent intent = new Intent(v.getContext(), menuActivity.class);
+                Intent intent = new Intent(MainActivity.this, menuActivity.class);
 
-                // Pasar la información de invitado a la siguiente actividad
-                intent.putExtra("ES_INVITADO", esInvitado);
 
-                // Iniciar la actividad MenuActivity
+                    // Si es un invitado, agrega un extra al intent para indicar que debe mostrar el FirstFragment
+                    intent.putExtra("mostrarFragmento", "firstFragment");
+
+                    // Si no es un invitado, puedes agregar lógica adicional aquí si es necesario
+                    // Por ejemplo, puedes mostrar el fragmento de inicio de sesión (fragmentLogin) o realizar otras acciones.
+
+
                 startActivity(intent);
             }
         });
