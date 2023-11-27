@@ -6,6 +6,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteException;
+
 
 import androidx.annotation.Nullable;
 
@@ -49,13 +51,19 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLE_PRODUCTOS + "(" +
                 "idProducto INTEGER PRIMARY KEY," +
                 "precio DOUBLE," +
-                "nombre TEXT )");
+                "nombre TEXT," +
+                "categoria TEXT," +
+                "descripcion TEXT," +
+                "stock INTEGER )");
+
 
         db.execSQL("CREATE TABLE " + TABLE_INCIDENCIAS + "(" +
                 "idIncidencia INTEGER PRIMARY KEY," +
                 "numPedido INTEGER," +
                 "fecha DATE," +
+                "hora TIME," +
                 "FOREIGN KEY (numPedido) REFERENCES " + TABLE_PEDIDOS + "(idPedido) ON DELETE CASCADE)");
+
 
         db.execSQL("CREATE TABLE " + TABLE_REPARTIDOR + "(" +
                 "idRepartidor INTEGER PRIMARY KEY," +
@@ -129,6 +137,11 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return isAdmin;
     }
+
+
+
+
+
 
 
 }
