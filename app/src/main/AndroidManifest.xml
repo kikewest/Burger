@@ -66,6 +66,17 @@
         </activity>
 
 
+        <activity android:name=".anadirIncidenciaActivity">
+        </activity>
+        <activity android:name=".modificarIncidenciaActivity">
+        </activity>
+        <activity android:name=".eliminarIncidenciaActivity">
+        </activity>
+        <activity android:name=".mostrarIncidenciaActivity">
+        </activity>
+
+
+
     </application>
 
 </manifest>

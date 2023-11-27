@@ -7,75 +7,98 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:background="#E4000000"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/insertar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:text="MODIFICAR PRODUCTO"
             android:gravity="center"
-            android:background="#E4000000"
             android:textColor="@color/aqua"
-            android:text="AÑADIR PRODUCTO"
             android:textSize="35dp" />
     </LinearLayout>
-
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="5dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/ModificarIDIncidenciaTexto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Introduce la ID a modificar"
+                android:gravity="center"
+                android:textSize="35dp" />
+
             <EditText
-                android:id="@+id/Nombre"
+                android:id="@+id/ModificarIDIncidencia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Nombre"
                 android:inputType="text"
+                android:hint="ID"
 
                 android:textSize="20dp" />
 
+            <TextView
+                android:id="@+id/NumPedidoTexto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Introduce el nuevo numero de pedido"
+                android:gravity="center"
+                android:textSize="35dp" />
+
             <EditText
-                android:id="@+id/Precio"
+                android:id="@+id/NumPedido"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Precio"
-                android:inputType="numberDecimal"
-                android:textSize="20sp" />
+                android:inputType="text"
+                android:hint="Numero de pedido"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/FechaTexto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Introduce la nueva fecha "
+                android:gravity="center"
+                android:textSize="35dp" />
+
             <EditText
-                android:id="@+id/Categoria"
+                android:id="@+id/Fecha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Categoria"
-                android:inputType="textMultiLine"
-                android:textSize="20sp" />
+                android:inputType="date"
+                android:hint="Fecha"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/HoraTexto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Introduce la nueva hora "
+                android:gravity="center"
+                android:textSize="35dp" />
+
             <EditText
-                android:id="@+id/Descripcion"
+                android:id="@+id/Hora"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Descripcion"
-                android:inputType="textMultiLine"
-                android:textSize="20sp" />
-            <EditText
-                android:id="@+id/Stock"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Stock"
-                android:inputType="number"
-                android:textSize="20sp" />
+                android:inputType="date"
+                android:hint="Fecha"
+                android:textSize="20dp" />
+
 
         </LinearLayout>
     </ScrollView>
@@ -87,14 +110,15 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/enviar"
+            android:id="@+id/Modificar"
             android:layout_width="178dp"
             android:layout_height="100dp"
             android:layout_marginHorizontal="20dp"
-            android:background="#E4000000"
             android:gravity="center"
             android:text="Enviar"
+            android:background="#E4000000"
             android:textColor="@color/aqua"
             android:textSize="30dp" />
+
     </LinearLayout>
 </LinearLayout>

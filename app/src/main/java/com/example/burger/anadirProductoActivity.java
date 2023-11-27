@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class anadirProductoActivity extends AppCompatActivity {
 
-    private EditText nombreEditText, precioEditText;
+    private EditText nombreEditText, precioEditText, categoriaEditText, descripcionEditText, stockEditText;
     private DbHelper dbHelper;
 
     @Override
@@ -22,6 +22,9 @@ public class anadirProductoActivity extends AppCompatActivity {
 
         nombreEditText = findViewById(R.id.Nombre);
         precioEditText = findViewById(R.id.Precio);
+        categoriaEditText = findViewById(R.id.Categoria);
+        descripcionEditText = findViewById(R.id.Descripcion);
+        stockEditText = findViewById(R.id.Stock);
 
         Button enviarButton = findViewById(R.id.enviar);
 
@@ -30,11 +33,15 @@ public class anadirProductoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String nombre = nombreEditText.getText().toString();
                 String precio = precioEditText.getText().toString();
+                String categoria = categoriaEditText.getText().toString();
+                String descripcion = descripcionEditText.getText().toString();
+                String stockStr = stockEditText.getText().toString();
 
-                if (nombre.isEmpty() || precio.isEmpty()) {
+                if (nombre.isEmpty() || precio.isEmpty() || categoria.isEmpty() || descripcion.isEmpty() || stockStr.isEmpty()) {
                     showToast("Por favor, completa todos los campos");
                 } else {
-                    long newRowId = insertProducto(nombre, precio);
+                    int stock = Integer.parseInt(stockStr);
+                    long newRowId = insertProducto(nombre, precio, categoria, descripcion, stock);
                     if (newRowId != -1) {
                         showToast("Producto agregado correctamente");
                         clearFields();
@@ -46,11 +53,14 @@ public class anadirProductoActivity extends AppCompatActivity {
         });
     }
 
-    private long insertProducto(String nombre, String precio) {
+    private long insertProducto(String nombre, String precio, String categoria, String descripcion, int stock) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("Nombre", nombre);
-        values.put("Precio", precio);
+        values.put("nombre", nombre);
+        values.put("precio", precio);
+        values.put("categoria", categoria);
+        values.put("descripcion", descripcion);
+        values.put("stock", stock);
         long newRowId = -1;
 
         try {
@@ -70,6 +80,8 @@ public class anadirProductoActivity extends AppCompatActivity {
     private void clearFields() {
         nombreEditText.setText("");
         precioEditText.setText("");
+        categoriaEditText.setText("");
+        descripcionEditText.setText("");
+        stockEditText.setText("");
     }
 }
-

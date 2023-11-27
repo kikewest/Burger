@@ -1,7 +1,9 @@
 package com.example.burger;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -58,7 +60,37 @@ public class ConexionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_conexion, container, false);
+        View view = inflater.inflate(R.layout.fragment_conexion, container, false);
+
+        AppCompatButton borrarBaseDatosBtn = view.findViewById(R.id.BorrarBaseDatos);
+        AppCompatButton crearBaseDatosBtn = view.findViewById(R.id.CrearBaseDatos);
+
+        borrarBaseDatosBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                borrarBaseDatos();
+            }
+        });
+
+        crearBaseDatosBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                crearBaseDatos();
+            }
+        });
+
+        return view;
+    }
+
+    private void borrarBaseDatos() {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        dbHelper.onUpgrade(db, 0, 0);
+        db.close();
+    }
+
+    private void crearBaseDatos() {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        dbHelper.onCreate(db);
+        db.close();
     }
 }
