@@ -14,4 +14,13 @@
         <item name="itemTextColor">@color/aqua</item>
 
     </style>
+
+    <style name="Theme.Burger.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Burger.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Burger.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
