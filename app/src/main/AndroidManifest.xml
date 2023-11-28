@@ -13,6 +13,11 @@
         android:theme="@style/Theme.Burger"
         tools:targetApi="31">
         <activity
+            android:name=".later"
+            android:exported="false"
+            android:label="@string/title_activity_later"
+            android:theme="@style/Theme.Burger.NoActionBar" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -23,60 +28,35 @@
         </activity>
         <activity
             android:name=".crearcuenta"
-            android:screenOrientation="fullSensor"
-            />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".inicio"
-            android:screenOrientation="fullSensor"
-            />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".menuActivity"
             android:label="Menu Activity">
+
             <!-- Puedes agregar más configuraciones según tus necesidades -->
         </activity>
         <activity
             android:name=".menu_administrador"
-            android:label="Menu administrador">
-        </activity>
-        <activity android:name=".anadirProductoActivity">
-        </activity>
-        <activity android:name=".modificarProductoActivity">
-        </activity>
-        <activity android:name=".eliminarProductoActivity">
-        </activity>
-        <activity android:name=".mostrarProductoActivity">
-        </activity>
-
-        <activity android:name=".anadirUsuarioActivity">
-        </activity>
-        <activity android:name=".modificarUsuarioActivity">
-        </activity>
-        <activity android:name=".eliminarUsuarioActivity">
-        </activity>
-        <activity android:name=".mostrarUsuarioActivity">
-        </activity>
-
-        <activity android:name=".anadirRepartidorActivity">
-        </activity>
-        <activity android:name=".modificarRepartidorActivity">
-        </activity>
-        <activity android:name=".eliminarRepartidorActivity">
-        </activity>
-        <activity android:name=".mostrarRepartidorActivity">
-        </activity>
-
-
-        <activity android:name=".anadirIncidenciaActivity">
-        </activity>
-        <activity android:name=".modificarIncidenciaActivity">
-        </activity>
-        <activity android:name=".eliminarIncidenciaActivity">
-        </activity>
-        <activity android:name=".mostrarIncidenciaActivity">
-        </activity>
-
-
-
+            android:label="Menu administrador"></activity>
+        <activity android:name=".anadirProductoActivity"></activity>
+        <activity android:name=".modificarProductoActivity"></activity>
+        <activity android:name=".eliminarProductoActivity"></activity>
+        <activity android:name=".mostrarProductoActivity"></activity>
+        <activity android:name=".anadirUsuarioActivity"></activity>
+        <activity android:name=".modificarUsuarioActivity"></activity>
+        <activity android:name=".eliminarUsuarioActivity"></activity>
+        <activity android:name=".mostrarUsuarioActivity"></activity>
+        <activity android:name=".anadirRepartidorActivity"></activity>
+        <activity android:name=".modificarRepartidorActivity"></activity>
+        <activity android:name=".eliminarRepartidorActivity"></activity>
+        <activity android:name=".mostrarRepartidorActivity"></activity>
+        <activity android:name=".anadirIncidenciaActivity"></activity>
+        <activity android:name=".modificarIncidenciaActivity"></activity>
+        <activity android:name=".eliminarIncidenciaActivity"></activity>
+        <activity android:name=".mostrarIncidenciaActivity"></activity>
     </application>
 
 </manifest>
