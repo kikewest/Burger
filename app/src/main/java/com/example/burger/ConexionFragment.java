@@ -3,6 +3,7 @@ package com.example.burger;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,15 +89,12 @@ public class ConexionFragment extends Fragment {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // Borra la base de datos burger.db
-                            if (requireContext().deleteDatabase("burger.db")) {
-                                Toast.makeText(requireContext(), "BASE DE DATOS BORRADA", Toast.LENGTH_LONG).show();
-                                // Deshabilita el botón después de borrar la base de datos
-                                btn.setEnabled(false);
-                                btn.setText("Base de datos borrada");
-                                // Muestra el botón para crear la base de datos
-                                crearBaseDatosBtn.setVisibility(View.VISIBLE);
+                            String nombreBaseDeDatos = "burger.db";
+                            if (requireActivity().deleteDatabase(nombreBaseDeDatos)) {
+                                Toast.makeText(requireContext(), "Base de datos '" + nombreBaseDeDatos + "' borrada con éxito", Toast.LENGTH_LONG).show();
+
                             } else {
-                                Toast.makeText(requireContext(), "ERROR AL BORRAR BASE DE DATOS", Toast.LENGTH_LONG).show();
+                                Toast.makeText(requireContext(), "No se pudo borrar la base de datos", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
