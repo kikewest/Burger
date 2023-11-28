@@ -2,23 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/Producto"
-        android:icon="@drawable/baseline_home_24"
+        android:icon="@drawable/producto_admin"
         android:title="Producto"/>
     <item
         android:id="@+id/Usuario"
-        android:icon="@drawable/baseline_shopping_cart_24"
+        android:icon="@drawable/baseline_person_24"
         android:title="Usuario"/>
     <item
         android:id="@+id/Repartidor"
-        android:icon="@drawable/baseline_person_24"
+        android:icon="@drawable/repartidor_admin"
         android:title="Repartidor"/>
     <item
         android:id="@+id/Incidencias"
-        android:icon="@drawable/baseline_person_24"
+        android:icon="@drawable/incidencia_admin"
         android:title="Incidencias"/>
     <item
         android:id="@+id/Conexion"
-        android:icon="@drawable/baseline_person_24"
+        android:icon="@drawable/conexion_admin"
         android:title="Conexion"/>
 
 

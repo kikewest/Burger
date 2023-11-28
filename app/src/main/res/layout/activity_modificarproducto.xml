@@ -81,6 +81,57 @@
                 android:inputType="textMultiLine"
                 android:hint="Precio"
                 android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/CategoriaTexto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Introduce la nueva  Categoria"
+                android:gravity="center"
+                android:textSize="35dp" />
+
+            <EditText
+                android:id="@+id/Categoria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:hint="Categoria"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/DescripcionTexto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Introduce la nueva Descripcion"
+                android:gravity="center"
+                android:textSize="35dp" />
+
+            <EditText
+                android:id="@+id/Descripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:hint="Descripcion"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/StockTexto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Introduce el nuevo Stock"
+                android:gravity="center"
+                android:textSize="35dp" />
+
+            <EditText
+                android:id="@+id/Stock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="Stock"
+                android:textSize="20dp" />
         </LinearLayout>
     </ScrollView>
 

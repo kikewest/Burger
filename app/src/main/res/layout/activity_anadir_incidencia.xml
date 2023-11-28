@@ -16,7 +16,7 @@
             android:gravity="center"
             android:background="#E4000000"
             android:textColor="@color/aqua"
-            android:text="AÑADIR PRODUCTO"
+            android:text="AÑADIR INCIDENCIA"
             android:textSize="35dp" />
     </LinearLayout>
 
@@ -35,47 +35,32 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/Nombre"
+                android:id="@+id/NumPedido"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Nombre"
+                android:hint="Numero Pedido"
                 android:inputType="text"
 
                 android:textSize="20dp" />
 
             <EditText
-                android:id="@+id/Precio"
+                android:id="@+id/Fecha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Precio"
-                android:inputType="numberDecimal"
-                android:textSize="20sp" />
+                android:hint="Fecha"
+                android:inputType="date"
+                android:textSize="20dp" />
+
             <EditText
-                android:id="@+id/Categoria"
+                android:id="@+id/Hora"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Categoria"
-                android:inputType="textMultiLine"
-                android:textSize="20sp" />
-            <EditText
-                android:id="@+id/Descripcion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Descripcion"
-                android:inputType="textMultiLine"
-                android:textSize="20sp" />
-            <EditText
-                android:id="@+id/Stock"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Stock"
-                android:inputType="number"
-                android:textSize="20sp" />
+                android:hint="Hora"
+                android:inputType="time"
+                android:textSize="20dp" />
 
         </LinearLayout>
     </ScrollView>
@@ -96,5 +81,7 @@
             android:text="Enviar"
             android:textColor="@color/aqua"
             android:textSize="30dp" />
+
+
     </LinearLayout>
 </LinearLayout>
