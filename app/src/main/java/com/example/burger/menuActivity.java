@@ -19,6 +19,9 @@ public class menuActivity extends AppCompatActivity {
     SecondFragment secondFragment = new SecondFragment();
     ThirdFragment thirdFragment = new ThirdFragment();
 
+    FourthFragment fourthFragment = new FourthFragment();
+
+
 
 
     protected void onCreate(Bundle saveInstanceState){
@@ -38,6 +41,8 @@ public class menuActivity extends AppCompatActivity {
                 loadFragment(secondFragment);
             } else if (fragmento.equals("thirdFragment")) {
                 loadFragment(thirdFragment);
+            }else if (fragmento.equals("fourthFragment")) {
+                loadFragment(fourthFragment);
             }
         } else {
             // Si no hay información en el Intent, carga el FirstFragment por defecto
@@ -64,6 +69,9 @@ public class menuActivity extends AppCompatActivity {
                 return true;
             } else if (item.getItemId() == R.id.thirdFragment) {
                 loadFragment(thirdFragment);
+                return true;
+            } else if (item.getItemId() == R.id.fourthFragment) {
+                loadFragment(fourthFragment);
                 return true;
             }
             return false;
