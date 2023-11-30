@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,9 +35,10 @@ public class menuActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         NavigationView lateral = findViewById(R.id.lateral);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
+        lateral.setVisibility(View.GONE);
         Intent intent = getIntent();
+        ImageView imagen = findViewById(R.id.imageView3);
+        imagen.setVisibility(View.GONE);
 
         if (intent != null && intent.hasExtra("mostrarFragmento")) {
             String fragmento = intent.getStringExtra("mostrarFragmento");
@@ -44,12 +46,16 @@ public class menuActivity extends AppCompatActivity {
             // Determina qué fragmento debe mostrarse según la información del Intent
             if (fragmento.equals("firstFragment")) {
                 loadFragment(firstFragment);
+                lateral.setVisibility(View.GONE);
             } else if (fragmento.equals("secondFragment")) {
                 loadFragment(secondFragment);
+                lateral.setVisibility(View.GONE);
             } else if (fragmento.equals("thirdFragment")) {
                 loadFragment(thirdFragment);
+                lateral.setVisibility(View.GONE);
             }else if (fragmento.equals("fourthFragment")) {
                 loadFragment(fourthFragment);
+                lateral.setVisibility(View.VISIBLE);
             }
         } else {
             // Si no hay información en el Intent, carga el FirstFragment por defecto
@@ -107,17 +113,28 @@ public class menuActivity extends AppCompatActivity {
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            NavigationView lateral = findViewById(R.id.lateral);
+            ImageView imagen = findViewById(R.id.imageView3);
+            imagen.setVisibility(View.GONE);
             if (item.getItemId() == R.id.firstFragment) {
                 loadFragment(firstFragment);
+                imagen.setVisibility(View.GONE);
+                lateral.setVisibility(View.GONE);
                 return true;
             } else if (item.getItemId() == R.id.secondFragment) {
                 loadFragment(secondFragment);
+                imagen.setVisibility(View.GONE);
+                lateral.setVisibility(View.GONE);
                 return true;
             } else if (item.getItemId() == R.id.thirdFragment) {
                 loadFragment(thirdFragment);
+                imagen.setVisibility(View.GONE);
+                lateral.setVisibility(View.GONE);
                 return true;
             } else if (item.getItemId() == R.id.fourthFragment) {
                 loadFragment(fourthFragment);
+                imagen.setVisibility(View.VISIBLE);
+                lateral.setVisibility(View.VISIBLE);
                 return true;
             }
             return false;
