@@ -3,19 +3,19 @@
     <item
         android:id="@+id/firstFragment"
         android:icon="@drawable/baseline_home_24"
-        android:title="Primero"/>
+        android:title="Menú"/>
     <item
         android:id="@+id/secondFragment"
-        android:icon="@drawable/baseline_shopping_cart_24"
-        android:title="Segundo"/>
+        android:icon="@drawable/oferta"
+        android:title="Ofertas"/>
     <item
         android:id="@+id/thirdFragment"
-        android:icon="@drawable/baseline_person_24"
-        android:title="Tercero"/>
+        android:icon="@drawable/baseline_shopping_cart_24"
+        android:title="Carrito"/>
     <item
         android:id="@+id/fourthFragment"
         android:icon="@drawable/baseline_person_24"
-        android:title="Cuarto"/>
+        android:title="Mi Perfil"/>
 
 
 </menu>

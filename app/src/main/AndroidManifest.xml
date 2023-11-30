@@ -22,12 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".crearcuenta"
-            android:screenOrientation="fullSensor" />
-        <activity
-            android:name=".inicio"
-            android:screenOrientation="fullSensor" />
+
         <activity
             android:name=".menuActivity"
             android:label="Menu Activity">
