@@ -75,6 +75,7 @@
                 android:background="@drawable/boton"
                 android:text="Crear Cuenta"
                 android:textColor="@color/aqua" />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/invitado"
                 android:layout_width="300dp"
