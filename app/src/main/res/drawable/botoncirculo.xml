@@ -1,0 +1,24 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Fondo redondeado -->
+    <item>
+        <shape android:shape="rectangle">
+            <size
+                android:width="300dp"
+                android:height="300dp" />
+
+            <corners android:radius="200dp" />
+
+            <stroke
+                android:width="10px"
+                android:color="@color/aqua" />
+
+            <solid android:color="#BF000000" />
+        </shape>
+    </item>
+
+    <!-- Icono en el centro -->
+    <item android:drawable="@drawable/sesion"
+    android:gravity="center" />
+
+</layer-list>
