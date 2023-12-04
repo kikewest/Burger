@@ -1,8 +1,15 @@
 package com.example.burger;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -22,11 +29,48 @@ public class menu_administrador extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_administrador);
 
+        Button btnsesion = findViewById(R.id.sesion);
+
         BottomNavigationView navigation = findViewById(R.id.menu_administrador);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         loadFragment(producto);
+
+
+        btnsesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Mostrar un cuadro de diálogo de confirmación
+                AlertDialog.Builder builder = new AlertDialog.Builder(menu_administrador.this);
+                builder.setTitle("Cerrar Sesión");
+                builder.setMessage("¿Estás seguro de que quieres cerrar sesión?");
+                builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Implementa aquí la lógica para cerrar sesión.
+                        // Por ejemplo, si estás utilizando SharedPreferences para almacenar la información de sesión:
+                        // Limpiar los datos de sesión (ejemplo con SharedPreferences)
+                        getSharedPreferences("preferencias", MODE_PRIVATE).edit().clear().apply();
+
+                        // Navegar a la pantalla de inicio de sesión
+                        Intent intent = new Intent(menu_administrador.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // El usuario ha cancelado, no hacemos nada
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+            }
+        });
     }
+
 
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -57,4 +101,5 @@ public class menu_administrador extends AppCompatActivity {
         transaction.replace(R.id.frame_container, fragment);
         transaction.commit();
     }
+
 }

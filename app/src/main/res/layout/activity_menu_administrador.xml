@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,7 +10,9 @@
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/menu_administrador"/>
+        android:layout_above="@id/menu_administrador">
+
+    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/menu_administrador"
@@ -26,4 +27,16 @@
         app:menu="@menu/menu_administrador"
         app:labelVisibilityMode="selected"
         style="@style/BottomNavigation"/>
+
+    <!-- Botón en la esquina inferior derecha -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/sesion"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="100dp"
+    android:layout_marginEnd="16dp"
+    android:background="@drawable/botoncirculo" />
+
 </RelativeLayout>
