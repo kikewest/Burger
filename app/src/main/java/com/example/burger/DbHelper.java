@@ -94,9 +94,9 @@ public class DbHelper extends SQLiteOpenHelper {
         insertarProducto(db, "Hamburguesa Doble Queso", "hamburguesas", "Hamburguesa doble con queso", 10.99, 38,"hamburguesadoblequeso");
         insertarProducto(db, "Hamburguesa Doble Bacon", "hamburguesas", "Hamburguesa doble con bacon", 11.99, 18,"hamburguesadoblebacon");
 
-        insertarProducto(db, "Agua", "bebidas", "Botella de agua", 1.99, 20,"agua");
-        insertarProducto(db, "Coca-Cola", "bebidas", "Lata de Coca-Cola", 2.49, 15,"cocacola");
-        insertarProducto(db, "Fanta", "bebidas", "Lata de Fanta de naranja", 2.49, 15,"fantanaranja");
+        insertarProducto(db, "Agua", "liquidos", "Botella de agua", 1.99, 20,"agua");
+        insertarProducto(db, "Coca-Cola", "liquidos", "Lata de Coca-Cola", 2.49, 15,"cocacola");
+        insertarProducto(db, "Fanta", "liquidos", "Lata de Fanta de naranja", 2.49, 15,"fantanaranja");
 
         insertarProducto(db, "Patatas Fritas", "entrantes", "Descripción del entrante 1", 4.99, 12,"patatasfritasperfectas");
         insertarProducto(db, "Nachos con queso", "entrantes", "Descripción del entrante 2", 3.99, 15,"nachosconqueso");

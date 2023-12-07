@@ -3,6 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="aqua">#51EDCF</color>
+    <color name="verde">#2ACD1F</color>
     <color name="aquaos">#0F372F</color>
     <color name="transparente">#00FFFFFF</color>
 </resources>
