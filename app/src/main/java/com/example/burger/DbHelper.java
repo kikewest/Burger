@@ -52,6 +52,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "idProducto INTEGER PRIMARY KEY," +
                 "precio DOUBLE," +
                 "nombre TEXT," +
+                "imagen TEXT," +
                 "categoria TEXT," +
                 "descripcion TEXT," +
                 "stock INTEGER )");
@@ -88,6 +89,30 @@ public class DbHelper extends SQLiteOpenHelper {
                 values.put("administrador", 1); // 1 si es administrador
 
         db.insert(TABLE_CLIENTES, null, values);
+
+        insertarProducto(db, "Hamburguesa de Ternera", "hamburguesas", "Deliciosa hamburguesa de ternera", 8.99, 10,"ternera");
+        insertarProducto(db, "Hamburguesa Doble Queso", "hamburguesas", "Hamburguesa doble con queso", 10.99, 38,"hamburguesadoblequeso");
+        insertarProducto(db, "Hamburguesa Doble Bacon", "hamburguesas", "Hamburguesa doble con bacon", 11.99, 18,"hamburguesadoblebacon");
+
+        insertarProducto(db, "Agua", "bebidas", "Botella de agua", 1.99, 20,"agua");
+        insertarProducto(db, "Coca-Cola", "bebidas", "Lata de Coca-Cola", 2.49, 15,"cocacola");
+        insertarProducto(db, "Fanta", "bebidas", "Lata de Fanta de naranja", 2.49, 15,"fantanaranja");
+
+        insertarProducto(db, "Patatas Fritas", "entrantes", "Descripción del entrante 1", 4.99, 12,"patatasfritasperfectas");
+        insertarProducto(db, "Nachos con queso", "entrantes", "Descripción del entrante 2", 3.99, 15,"nachosconqueso");
+
+        insertarProducto(db, "Tarta de queso", "postres", "Descripción del postre 1", 6.99, 10,"tartadequeso");
+        insertarProducto(db, "Helado", "postres", "Descripción del postre 2", 5.49, 8,"fresa");
+    }
+    private void insertarProducto(SQLiteDatabase db, String nombre, String categoria, String descripcion, double precio, int stock,String imagen) {
+        ContentValues values = new ContentValues();
+        values.put("nombre", nombre);
+        values.put("categoria", categoria);
+        values.put("descripcion", descripcion);
+        values.put("precio", precio);
+        values.put("stock", stock);
+        values.put("imagen", imagen);
+        db.insert(TABLE_PRODUCTOS, null, values);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
