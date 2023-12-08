@@ -13,6 +13,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.DecelerateInterpolator;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -41,7 +45,7 @@ public class FirstFragment extends Fragment {
         productLayout = view.findViewById(R.id.productLayout);
 
         // Agrega las imágenes al carrusel
-        int ofertas[] = {R.drawable.oferta1, R.drawable.oferta2, R.drawable.oferta3};
+        int ofertas[] = {R.drawable.oferta1, R.drawable.oferta2, R.drawable.oferta3, R.drawable.oferta4};
         for (int oferta : ofertas) {
             sliderimagenes(oferta);
         }
@@ -49,8 +53,18 @@ public class FirstFragment extends Fragment {
         // Configuración del ViewFlipper
         slider.setFlipInterval(3000);
         slider.setAutoStart(true);
-        slider.setInAnimation(requireActivity(), android.R.anim.fade_out);
-        slider.setOutAnimation(requireActivity(), android.R.anim.fade_in);
+        // Usar animaciones personalizadas para evitar el parpadeo
+        Animation fadeIn = new AlphaAnimation(0, 1);
+        fadeIn.setInterpolator(new DecelerateInterpolator()); // opcional
+        fadeIn.setDuration(1000); // ajusta la duración según sea necesario
+
+        Animation fadeOut = new AlphaAnimation(1, 0);
+        fadeOut.setInterpolator(new AccelerateInterpolator()); // opcional
+        fadeOut.setStartOffset(1000); // opcional, añade un retraso entre la animación de salida y entrada
+        fadeOut.setDuration(1000); // ajusta la duración según sea necesario
+
+        slider.setInAnimation(fadeIn);
+        slider.setOutAnimation(fadeOut);
 
         // Inicializa el dbHelper
         dbHelper = new DbHelper(requireContext());
