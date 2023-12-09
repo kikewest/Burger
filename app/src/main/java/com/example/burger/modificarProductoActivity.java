@@ -1,6 +1,7 @@
 package com.example.burger;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class modificarProductoActivity extends AppCompatActivity {
 
-    EditText modificarIdEditText, nombreEditText, precioEditText, categoriaEditText, descripcionEditText, stockEditText;
+    EditText modificarIdEditText, nombreEditText, precioEditText, categoriaEditText, descripcionEditText, stockEditText, imagenEditText;
     DbHelper dbHelper;
 
     @Override
@@ -27,6 +28,7 @@ public class modificarProductoActivity extends AppCompatActivity {
         categoriaEditText = findViewById(R.id.Categoria);
         descripcionEditText = findViewById(R.id.Descripcion);
         stockEditText = findViewById(R.id.Stock);
+        imagenEditText = findViewById(R.id.Imagen);
 
         Button modificarButton = findViewById(R.id.Modificar);
         modificarButton.setOnClickListener(new View.OnClickListener() {
@@ -38,8 +40,9 @@ public class modificarProductoActivity extends AppCompatActivity {
                 String categoria = categoriaEditText.getText().toString();
                 String descripcion = descripcionEditText.getText().toString();
                 String stockStr = stockEditText.getText().toString();
+                String imagen = imagenEditText.getText().toString();
 
-                if (modificarId.isEmpty() || nombre.isEmpty() || precio.isEmpty() || categoria.isEmpty() || descripcion.isEmpty() || stockStr.isEmpty()) {
+                if (modificarId.isEmpty() || nombre.isEmpty() || precio.isEmpty() || categoria.isEmpty() || descripcion.isEmpty() || stockStr.isEmpty() || imagen.isEmpty()) {
                     Toast.makeText(modificarProductoActivity.this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
                 } else {
                     int stock = Integer.parseInt(stockStr);
@@ -52,6 +55,7 @@ public class modificarProductoActivity extends AppCompatActivity {
                     values.put("categoria", categoria);
                     values.put("descripcion", descripcion);
                     values.put("stock", stock);
+                    values.put("imagen", imagen);
 
                     String selection = "idProducto = ?";
                     String[] selectionArgs = { modificarId };
@@ -66,6 +70,7 @@ public class modificarProductoActivity extends AppCompatActivity {
                         categoriaEditText.setText("");
                         descripcionEditText.setText("");
                         stockEditText.setText("");
+                        imagenEditText.setText("");
                     } else {
                         Toast.makeText(modificarProductoActivity.this, "Error al modificar el producto", Toast.LENGTH_SHORT).show();
                     }
