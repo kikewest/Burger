@@ -104,7 +104,7 @@ public class DbHelper extends SQLiteOpenHelper {
         insertarProducto(db, "Tarta de queso", "postres", "Descripción del postre 1", 6.99, 10,"tartadequeso");
         insertarProducto(db, "Helado", "postres", "Descripción del postre 2", 5.49, 8,"fresa");
     }
-    private void insertarProducto(SQLiteDatabase db, String nombre, String categoria, String descripcion, double precio, int stock,String imagen) {
+    public void insertarProducto(SQLiteDatabase db, String nombre, String categoria, String descripcion, double precio, int stock, String imagen) {
         ContentValues values = new ContentValues();
         values.put("nombre", nombre);
         values.put("categoria", categoria);

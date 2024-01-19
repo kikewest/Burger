@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/fondotech"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".FourthFragment">
+    tools:context=".FourthFragment"
+    >
 
 </FrameLayout>
