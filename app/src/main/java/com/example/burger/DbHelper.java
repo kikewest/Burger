@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteException;
+import android.util.Log;
 
 
 import androidx.annotation.Nullable;
@@ -52,7 +53,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "idProducto INTEGER PRIMARY KEY," +
                 "precio DOUBLE," +
                 "nombre TEXT," +
-                "imagen TEXT," +
+                "imagen TEXT," +  // Add this line for the 'imagen' column
                 "categoria TEXT," +
                 "descripcion TEXT," +
                 "stock INTEGER )");
@@ -142,6 +143,25 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return count > 0;
     }
+    @SuppressLint("Range")
+    public int obtenerIdUsuario(String username, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {"idUsuario"};
+        String selection = "nombre=? AND contrasenia=?";
+        String[] selectionArgs = {username, password};
+        Cursor cursor = db.query(TABLE_CLIENTES, columns, selection, selectionArgs, null, null, null);
+
+        int userId = -1; // Valor predeterminado si la autenticación falla
+
+        if (cursor.moveToFirst()) {
+            userId = cursor.getInt(cursor.getColumnIndex("idUsuario"));
+        }
+
+        cursor.close();
+        db.close();
+
+        return userId;
+    }
 
     @SuppressLint("Range")
     public boolean isUserAdmin(String username) {
@@ -162,6 +182,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return isAdmin;
     }
+
 
 
 
