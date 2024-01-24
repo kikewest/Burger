@@ -24,9 +24,6 @@ public class menuActivity extends AppCompatActivity {
     ThirdFragment thirdFragment = new ThirdFragment();
     FourthFragment fourthFragment = new FourthFragment();
 
-
-
-
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_menu);
@@ -81,6 +78,17 @@ public class menuActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        MenuItem perfilItem = lateral.getMenu().findItem(R.id.perfil);
+        // Establece un OnClickListener para el elemento de menú
+        perfilItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Log.d("MenuItemClick", "Cerrar Sesión seleccionado");
+                abrirActivityPerfil();
+                return true;
+            }
+        });
     }
 
     @Override
@@ -91,17 +99,23 @@ public class menuActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        // Este método se usa para manejar clics en el menú de la ActionBar (si lo tienes).
-        // Como ya estás manejando el clic en el elemento de menú directamente, este método no es necesario aquí.
-        return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.perfil) {
+            abrirActivityPerfil();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
-    private void cerrarSesion() {
-        // Implementa aquí la lógica para cerrar sesión.
-        // Por ejemplo, si estás utilizando SharedPreferences para almacenar la información de sesión:
-        // Limpiar los datos de sesión (ejemplo con SharedPreferences)
-        getSharedPreferences("preferencias", MODE_PRIVATE).edit().clear().apply();
+    private void abrirActivityPerfil() {
+        Intent intent = new Intent(this, modificarDatosPersonales.class);
+        startActivity(intent);
+    }
 
+
+    private void cerrarSesion() {
+        // Utiliza el mismo nombre de SharedPreferences y clave que en LoginFragment
+        getSharedPreferences("MyPrefs", MODE_PRIVATE).edit().clear().apply();
 
         // Navegar a la pantalla de inicio de sesión
         Intent intent = new Intent(this, MainActivity.class);
@@ -140,6 +154,8 @@ public class menuActivity extends AppCompatActivity {
             return false;
         }
     };
+
+
 
     public void loadFragment(Fragment fragment){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
