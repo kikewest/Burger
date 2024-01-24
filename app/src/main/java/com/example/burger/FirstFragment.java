@@ -29,6 +29,8 @@ import com.bumptech.glide.Glide;
 
 import java.util.Locale;
 
+
+
 public class FirstFragment extends Fragment {
 
     ViewFlipper slider;
@@ -149,8 +151,8 @@ public class FirstFragment extends Fragment {
         View productCard = LayoutInflater.from(requireContext()).inflate(R.layout.product_card, productLayout, false);
 
         // Configura la información del producto en la tarjeta
-        TextView nombreTextView = productCard.findViewById(R.id.productName);
-        TextView precioTextView = productCard.findViewById(R.id.productPrice);
+        TextView nombreTextView = productCard.findViewById(R.id.nombreProducto);
+        TextView precioTextView = productCard.findViewById(R.id.precioProducto);
         ImageView imagenImageView = productCard.findViewById(R.id.productImage);
 
         nombreTextView.setText(nombre);
