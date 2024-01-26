@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ThirdFragment"
     android:background="@drawable/fondogris">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ViewFlipper
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:textColor="@color/aqua"
-        android:textSize="40sp"
-        android:text="CARRITO" />
+        android:layout_below="@id/slider"
+        android:layout_marginTop="-1dp">
 
-</FrameLayout>
+        <!-- LinearLayout vertical para los productos -->
+        <LinearLayout
+            android:id="@+id/productLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"></LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

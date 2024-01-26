@@ -150,6 +150,7 @@ public class FirstFragment extends Fragment {
         View productCard = LayoutInflater.from(requireContext()).inflate(R.layout.product_card, productLayout, false);
 
         // Configura la información del producto en la tarjeta
+        EditText cantidadEditText = productCard.findViewById(R.id.cantidadProducto);
         TextView nombreTextView = productCard.findViewById(R.id.nombreProducto);
         TextView precioTextView = productCard.findViewById(R.id.precioProducto);
         ImageView imagenImageView = productCard.findViewById(R.id.productImage);
@@ -170,15 +171,15 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Obtén el id del producto y otros detalles necesarios
-                int idProducto = obtenerIdProducto(nombre);  // Debes implementar este método
-                int idUsuario = obtenerIdUsuarioActual();   // Debes implementar este método
+                int idProducto = obtenerIdProducto(nombre);
+                int idUsuario = obtenerIdUsuarioActual();
                 String nombreProducto = nombre;
-                int cantidadProducto = obtenerCantidadProducto(productCard);  // Debes implementar este método
-                double precioProducto = precio;
+                int cantidadProducto = obtenerCantidadProducto(productCard);
+                double precioTotal = cantidadProducto * precio;
 
                 // Agrega el producto al carrito utilizando el DBHelper
-                Toast.makeText(requireContext(),"producto añadido", Toast.LENGTH_SHORT).show();
-                dbHelper.agregarProductoAlCarro(idUsuario, idProducto, nombreProducto, cantidadProducto, precioProducto);
+                Toast.makeText(requireContext(),"producto añadido al carrito", Toast.LENGTH_SHORT).show();
+                dbHelper.agregarProductoAlCarro(idUsuario, idProducto, nombreProducto, cantidadProducto, precioTotal, rutaImagen);
             }
         });
 

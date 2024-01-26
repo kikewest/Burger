@@ -66,6 +66,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "nombreProducto TEXT," +
                 "cantidad INTEGER," +
                 "precio DOUBLE," +
+                "imagen TEXT," +
                 "FOREIGN KEY (idUsuario) REFERENCES " + TABLE_CLIENTES + "(idUsuario)," +
                 "FOREIGN KEY (idProducto) REFERENCES " + TABLE_PRODUCTOS + "(idProducto))");
 
@@ -136,7 +137,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE tiene");
         onCreate(db);
     }
-    public void agregarProductoAlCarro(int idUsuario, int idProducto, String nombreProducto, int cantidad, double precio) {
+    public void agregarProductoAlCarro(int idUsuario, int idProducto, String nombreProducto, int cantidad, double precio,String imagen) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         // Insertar el producto en el carrito
@@ -146,6 +147,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put("nombreProducto", nombreProducto);
         values.put("cantidad", cantidad);
         values.put("precio", precio);
+        values.put("imagen", imagen);
         db.insert(TABLE_CARRO, null, values);
 
         db.close();
@@ -168,6 +170,29 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
 
         return count > 0;
+    }
+    public void actualizarCantidadProductoEnCarro(int idUsuario, int idProducto, int nuevaCantidad) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("cantidad", nuevaCantidad);
+
+        String whereClause = "idUsuario=? AND idProducto=?";
+        String[] whereArgs = {String.valueOf(idUsuario), String.valueOf(idProducto)};
+
+        db.update(TABLE_CARRO, values, whereClause, whereArgs);
+
+        db.close();
+    }
+    public void eliminarProductoDelCarro(int idUsuario, int idProducto) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String whereClause = "idUsuario=? AND idProducto=?";
+        String[] whereArgs = {String.valueOf(idUsuario), String.valueOf(idProducto)};
+
+        db.delete(TABLE_CARRO, whereClause, whereArgs);
+
+        db.close();
     }
     @SuppressLint("Range")
     public int obtenerIdUsuario(String username, String password) {
