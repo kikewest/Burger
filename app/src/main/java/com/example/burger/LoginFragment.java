@@ -24,8 +24,8 @@ public class LoginFragment extends Fragment {
     private EditText editTextUsuario;
     private EditText editTextContraseña;
 
-    private static final String PREF_NAME = "MyPrefs";
-    private static final String KEY_USERID = "userId";
+    public static final String PREF_NAME = "MyPrefs";
+    public static final String KEY_USERID = "userId";
 
 
     @Override

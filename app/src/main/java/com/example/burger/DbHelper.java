@@ -25,6 +25,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     private static final String TABLE_REPARTIDOR="repartidor";
     private static final String TABLE_TIENE="tiene";
+    private static final String TABLE_CARRO = "carro";
     public DbHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -57,6 +58,16 @@ public class DbHelper extends SQLiteOpenHelper {
                 "categoria TEXT," +
                 "descripcion TEXT," +
                 "stock INTEGER )");
+
+        db.execSQL("CREATE TABLE " + TABLE_CARRO + "(" +
+                "idCarro INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "idUsuario INTEGER," +
+                "idProducto INTEGER," +
+                "nombreProducto TEXT," +
+                "cantidad INTEGER," +
+                "precio DOUBLE," +
+                "FOREIGN KEY (idUsuario) REFERENCES " + TABLE_CLIENTES + "(idUsuario)," +
+                "FOREIGN KEY (idProducto) REFERENCES " + TABLE_PRODUCTOS + "(idProducto))");
 
 
         db.execSQL("CREATE TABLE " + TABLE_INCIDENCIAS + "(" +
@@ -125,6 +136,21 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE tiene");
         onCreate(db);
     }
+    public void agregarProductoAlCarro(int idUsuario, int idProducto, String nombreProducto, int cantidad, double precio) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Insertar el producto en el carrito
+        ContentValues values = new ContentValues();
+        values.put("idUsuario", idUsuario);
+        values.put("idProducto", idProducto);
+        values.put("nombreProducto", nombreProducto);
+        values.put("cantidad", cantidad);
+        values.put("precio", precio);
+        db.insert(TABLE_CARRO, null, values);
+
+        db.close();
+    }
+
     public boolean authenticateUser(String username, String password) {
         // Obtiene una referencia de solo lectura a la base de datos
         SQLiteDatabase db = this.getReadableDatabase();

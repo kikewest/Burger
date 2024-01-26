@@ -1,5 +1,7 @@
 package com.example.burger;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -13,14 +15,12 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.DecelerateInterpolator;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -36,7 +36,6 @@ public class FirstFragment extends Fragment {
     ViewFlipper slider;
     LinearLayout productLayout;
     DbHelper dbHelper;
-
     public FirstFragment() {
         // Required empty public constructor
     }
@@ -165,5 +164,61 @@ public class FirstFragment extends Fragment {
 
         // Agrega la tarjeta de producto al LinearLayout
         productLayout.addView(productCard);
+        // Configura el clic en el carrito para agregar al carrito
+        ImageView carritoImageView = productCard.findViewById(R.id.carritoProducto);
+        carritoImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Obtén el id del producto y otros detalles necesarios
+                int idProducto = obtenerIdProducto(nombre);  // Debes implementar este método
+                int idUsuario = obtenerIdUsuarioActual();   // Debes implementar este método
+                String nombreProducto = nombre;
+                int cantidadProducto = obtenerCantidadProducto(productCard);  // Debes implementar este método
+                double precioProducto = precio;
+
+                // Agrega el producto al carrito utilizando el DBHelper
+                Toast.makeText(requireContext(),"producto añadido", Toast.LENGTH_SHORT).show();
+                dbHelper.agregarProductoAlCarro(idUsuario, idProducto, nombreProducto, cantidadProducto, precioProducto);
+            }
+        });
+
+    }
+    private int obtenerCantidadProducto(View productCard) {
+        EditText cantidadEditText = productCard.findViewById(R.id.cantidadProducto);
+
+        try {
+            // Intenta obtener la cantidad desde el EditText
+            return Integer.parseInt(cantidadEditText.getText().toString());
+        } catch (NumberFormatException e) {
+            // En caso de error al parsear, devuelve 0 o maneja el error según tus necesidades
+            return 0;
+        }
+    }
+    private int obtenerIdUsuarioActual() {
+        // Utiliza SharedPreferences para obtener el ID del usuario actual
+        SharedPreferences preferences = requireContext().getSharedPreferences(LoginFragment.PREF_NAME, Context.MODE_PRIVATE);
+        return preferences.getInt(LoginFragment.KEY_USERID, -1);  // Retorna -1 si no se encuentra el ID del usuario
+    }
+
+
+    private int obtenerIdProducto(String nombreProducto) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String[] columns = {"idProducto"};
+        String selection = "nombre=?";
+        String[] selectionArgs = {nombreProducto};
+
+        Cursor cursor = db.query("productos", columns, selection, selectionArgs, null, null, null);
+
+        int idProducto = -1;  // Valor predeterminado si no se encuentra el producto
+
+        if (cursor.moveToFirst()) {
+            idProducto = cursor.getInt(cursor.getColumnIndex("idProducto"));
+        }
+
+        cursor.close();
+        db.close();
+
+        return idProducto;
     }
 }
