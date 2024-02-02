@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -34,10 +39,15 @@ public class ThirdFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
         }
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        actualizarTotalPrecio();
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,14 +55,40 @@ public class ThirdFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_third, container, false);
 
         // Inicializa el LinearLayout dentro de onCreateView
-        cartLayout = view.findViewById(R.id.productLayout);
+        cartLayout = view.findViewById(R.id.carroLayout);
 
         // Inicializa el dbHelper
         dbHelper = new DbHelper(requireContext());
+        AppCompatButton realizarPedidoButton = view.findViewById(R.id.realizar);
+        realizarPedidoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Obtén el ID del usuario actual
+                int idUsuario = obtenerIdUsuarioActual();
 
+                // Verifica que haya un usuario autenticado
+                if (idUsuario != -1) {
+                    // Realiza el pedido
+                    dbHelper.realizarPedido(idUsuario);
+                    actualizarTotalPrecio();
+                    cartLayout.removeAllViews();
+                    // Muestra un mensaje o realiza alguna acción adicional si es necesario
+                    Toast.makeText(requireContext(), "Pedido realizado con éxito", Toast.LENGTH_SHORT).show();
+                } else {
+                    // El usuario no está autenticado, muestra un mensaje o realiza alguna acción adicional si es necesario
+                    Toast.makeText(requireContext(), "Usuario no autenticado", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         // Carga los productos del carro desde la base de datos
         cargarProductosDelCarro();
+        actualizarTotalPrecio();
         return view;
+    }
+    public static String obtenerFechaActual() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
     }
     private int obtenerIdUsuarioActual() {
         // Utiliza SharedPreferences para obtener el ID del usuario actual
@@ -84,6 +120,32 @@ public class ThirdFragment extends Fragment {
         cursor.close();
         db.close();
     }
+    public void actualizarTotalPrecio() {
+        View fragmentView = getView();
+        if (fragmentView != null) {
+            double totalPrecio = calcularTotalPrecio();
+            TextView totalPrecioTextView = fragmentView.findViewById(R.id.totalPrecioTextView);
+            totalPrecioTextView.setText(String.format(Locale.getDefault(), "Total: €%.2f", totalPrecio));
+        }
+    }
+
+    private double calcularTotalPrecio() {
+        int idUsuario = obtenerIdUsuarioActual();
+
+        // Obtén la lista de precios de los productos en el carrito
+        List<Double> precios = dbHelper.obtenerPreciosProductosEnCarro(idUsuario);
+
+        // Mueve la declaración de totalPrecio aquí
+        double totalPrecio = 0.0;
+
+        // Suma los precios
+        for (double precio : precios) {
+            totalPrecio += precio;
+        }
+
+        return totalPrecio;
+    }
+
     private int obtenerIdProducto(String nombreProducto) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
@@ -104,25 +166,14 @@ public class ThirdFragment extends Fragment {
 
         return idProducto;
     }
-    private int obtenerCantidadProducto(View productCard) {
-        EditText cantidadEditText = productCard.findViewById(R.id.cantidadProducto);
-
-        try {
-            // Intenta obtener la cantidad desde el EditText
-            return Integer.parseInt(cantidadEditText.getText().toString());
-        } catch (NumberFormatException e) {
-            // En caso de error al parsear, devuelve 0 o maneja el error según tus necesidades
-            return 0;
-        }
-    }
     private void agregarProductoAlCarro(String nombre, double precio, int cantidad,String rutaImagen) {
         // Infla dinámicamente la tarjeta de producto y agrega al LinearLayout
-        View cartProductCard = LayoutInflater.from(requireContext()).inflate(R.layout.product_card, cartLayout, false);
+        View cartProductCard = LayoutInflater.from(requireContext()).inflate(R.layout.carrocard, cartLayout, false);
 
         // Configura la información del producto en la tarjeta
         TextView nombreTextView = cartProductCard.findViewById(R.id.nombreProducto);
         TextView precioTextView = cartProductCard.findViewById(R.id.precioProducto);
-        EditText cantidadEditText = cartProductCard.findViewById(R.id.cantidadProducto);
+        TextView cantidadEditText = cartProductCard.findViewById(R.id.cantidadProductoc);
         cantidadEditText.setEnabled(false);
         ImageView imagenImageView = cartProductCard.findViewById(R.id.productImage);
 
@@ -137,21 +188,7 @@ public class ThirdFragment extends Fragment {
 
         // Agrega la tarjeta de producto al LinearLayout
         cartLayout.addView(cartProductCard);
-        // Configura el clic en el carrito para actualizar la cantidad en el carro
-        ImageView carritoImageView = cartProductCard.findViewById(R.id.carritoProducto);
-        carritoImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Obtén el id del producto y otros detalles necesarios
-                int idProducto = obtenerIdProducto(nombre);  // Debes implementar este método
-                int idUsuario = obtenerIdUsuarioActual();   // Debes implementar este método
-                int nuevaCantidad = obtenerCantidadProducto(cartProductCard);  // Debes implementar este método
-
-                // Actualiza la cantidad del producto en el carro utilizando el DBHelper
-                dbHelper.actualizarCantidadProductoEnCarro(idUsuario, idProducto, nuevaCantidad);
-                Toast.makeText(requireContext(), "Cantidad actualizada en el carrito", Toast.LENGTH_SHORT).show();
-            }
-        });
+        actualizarTotalPrecio();
 
         // Configura el clic en el icono de eliminar para quitar el producto del carro
         ImageView eliminarImageView = cartProductCard.findViewById(R.id.carritoProducto);
@@ -165,9 +202,11 @@ public class ThirdFragment extends Fragment {
                 dbHelper.eliminarProductoDelCarro(obtenerIdUsuarioActual(), idProducto);
                 // Remueve la vista de la tarjeta de producto del LinearLayout
                 cartLayout.removeView(cartProductCard);
+                actualizarTotalPrecio();
                 Toast.makeText(requireContext(), "Producto eliminado del carrito", Toast.LENGTH_SHORT).show();
             }
         });
+        actualizarTotalPrecio();
     }
 
 }

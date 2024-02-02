@@ -12,6 +12,9 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DbHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION=2;
     private static final String DATABASE_NAME="burger.db";
@@ -44,6 +47,10 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLE_PEDIDOS + "(" +
                 "idPedido INTEGER PRIMARY KEY," +
                 "fecha DATE," +
+                "nombreProducto TEXT," +
+                "cantidad INTEGER," +
+                "precio DOUBLE," +
+                "imagen TEXT," +
                 "idUsuario INTEGER," +
                 "idProducto INTEGER," +
                 "idRepartidor INTEGER," +
@@ -127,6 +134,40 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put("imagen", imagen);
         db.insert(TABLE_PRODUCTOS, null, values);
     }
+    public void realizarPedido(int idUsuario) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        // Agrega la fecha actual al pedido
+        values.put("fecha", ThirdFragment.obtenerFechaActual());
+
+        // Obtiene los datos del carrito del usuario
+        String query = "SELECT * FROM " + TABLE_CARRO + " WHERE idUsuario = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(idUsuario)});
+
+        while (cursor.moveToNext()) {
+            // Obtiene los datos de cada producto en el carrito
+            String nombreProducto = cursor.getString(cursor.getColumnIndex("nombreProducto"));
+            int cantidad = cursor.getInt(cursor.getColumnIndex("cantidad"));
+            double precio = cursor.getDouble(cursor.getColumnIndex("precio"));
+            String imagen = cursor.getString(cursor.getColumnIndex("imagen"));
+
+            // Agrega el producto al pedido
+            values.put("nombreProducto", nombreProducto);
+            values.put("cantidad", cantidad);
+            values.put("precio", precio);
+            values.put("imagen", imagen);
+
+            // Inserta el pedido en la tabla 'pedidos'
+            db.insert(TABLE_PEDIDOS, null, values);
+        }
+
+        // Elimina los productos del carrito después de realizar el pedido
+        db.delete(TABLE_CARRO, "idUsuario=?", new String[]{String.valueOf(idUsuario)});
+
+        cursor.close();
+        db.close();
+    }
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE clientes");
@@ -136,6 +177,24 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE repartidor");
         db.execSQL("DROP TABLE tiene");
         onCreate(db);
+    }
+    public List<Double> obtenerPreciosProductosEnCarro(int idUsuario) {
+        SQLiteDatabase db = getReadableDatabase();
+
+        String query = "SELECT precio FROM carro WHERE idUsuario = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(idUsuario)});
+
+        List<Double> precios = new ArrayList<>();
+
+        while (cursor.moveToNext()) {
+            double precio = cursor.getDouble(cursor.getColumnIndex("precio"));
+            precios.add(precio);
+        }
+
+        cursor.close();
+        db.close();
+
+        return precios;
     }
     public void agregarProductoAlCarro(int idUsuario, int idProducto, String nombreProducto, int cantidad, double precio,String imagen) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -171,19 +230,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return count > 0;
     }
-    public void actualizarCantidadProductoEnCarro(int idUsuario, int idProducto, int nuevaCantidad) {
-        SQLiteDatabase db = this.getWritableDatabase();
 
-        ContentValues values = new ContentValues();
-        values.put("cantidad", nuevaCantidad);
-
-        String whereClause = "idUsuario=? AND idProducto=?";
-        String[] whereArgs = {String.valueOf(idUsuario), String.valueOf(idProducto)};
-
-        db.update(TABLE_CARRO, values, whereClause, whereArgs);
-
-        db.close();
-    }
     public void eliminarProductoDelCarro(int idUsuario, int idProducto) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -233,12 +280,5 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return isAdmin;
     }
-
-
-
-
-
-
-
 
 }

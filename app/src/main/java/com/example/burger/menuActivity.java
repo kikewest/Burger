@@ -17,11 +17,11 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-public class menuActivity extends AppCompatActivity {
+public class menuActivity extends AppCompatActivity  {
 
     FirstFragment firstFragment = new FirstFragment();
     SecondFragment secondFragment = new SecondFragment();
-    ThirdFragment thirdFragment = new ThirdFragment();
+    private ThirdFragment thirdFragment;
     FourthFragment fourthFragment = new FourthFragment();
 
 
@@ -38,7 +38,9 @@ public class menuActivity extends AppCompatActivity {
         Intent intent = getIntent();
         ImageView imagen = findViewById(R.id.imageView3);
         imagen.setVisibility(View.GONE);
-
+        if (thirdFragment == null) {
+            thirdFragment = new ThirdFragment();
+        }
         if (intent != null && intent.hasExtra("mostrarFragmento")) {
             String fragmento = intent.getStringExtra("mostrarFragmento");
 
@@ -58,6 +60,7 @@ public class menuActivity extends AppCompatActivity {
             }
         } else {
             // Si no hay información en el Intent, carga el FirstFragment por defecto
+
             loadFragment(firstFragment);
         }
 
@@ -92,7 +95,6 @@ public class menuActivity extends AppCompatActivity {
             }
         });
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.lateral_navigation, menu);
@@ -143,7 +145,7 @@ public class menuActivity extends AppCompatActivity {
                 lateral.setVisibility(View.GONE);
                 return true;
             } else if (item.getItemId() == R.id.thirdFragment) {
-                loadFragment(thirdFragment);
+                loadFragment(thirdFragment);  // Utiliza la instancia existente
                 imagen.setVisibility(View.GONE);
                 lateral.setVisibility(View.GONE);
                 return true;
