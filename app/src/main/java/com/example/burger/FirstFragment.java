@@ -39,7 +39,20 @@ public class FirstFragment extends Fragment {
     public FirstFragment() {
         // Required empty public constructor
     }
+    public void onResume() {
+        super.onResume();
 
+        // Itera sobre las tarjetas de productos y establece la cantidad a 1
+        for (int i = 0; i < productLayout.getChildCount(); i++) {
+            View productCard = productLayout.getChildAt(i);
+            EditText cantidadEditText = productCard.findViewById(R.id.cantidadProducto);
+
+            // Verifica que el EditText no sea nulo antes de intentar establecer el texto
+            if (cantidadEditText != null) {
+                cantidadEditText.setText("1");
+            }
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -150,7 +163,6 @@ public class FirstFragment extends Fragment {
         View productCard = LayoutInflater.from(requireContext()).inflate(R.layout.product_card, productLayout, false);
 
         // Configura la información del producto en la tarjeta
-        EditText cantidadEditText = productCard.findViewById(R.id.cantidadProducto);
         TextView nombreTextView = productCard.findViewById(R.id.nombreProducto);
         TextView precioTextView = productCard.findViewById(R.id.precioProducto);
         ImageView imagenImageView = productCard.findViewById(R.id.productImage);
@@ -178,8 +190,15 @@ public class FirstFragment extends Fragment {
                 double precioTotal = cantidadProducto * precio;
 
                 // Agrega el producto al carrito utilizando el DBHelper
-                Toast.makeText(requireContext(),"producto añadido al carrito", Toast.LENGTH_SHORT).show();
                 dbHelper.agregarProductoAlCarro(idUsuario, idProducto, nombreProducto, cantidadProducto, precioTotal, rutaImagen);
+
+                // Actualiza el total de precio en ThirdFragment
+                ThirdFragment fragment = (ThirdFragment) getParentFragmentManager().findFragmentById(R.id.thirdFragment);
+                if (fragment != null) {
+                    fragment.actualizarTotalPrecio();
+                }
+
+                Toast.makeText(requireContext(), "Producto añadido al carrito", Toast.LENGTH_SHORT).show();
             }
         });
 
