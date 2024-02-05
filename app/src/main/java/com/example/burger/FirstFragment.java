@@ -39,7 +39,20 @@ public class FirstFragment extends Fragment {
     public FirstFragment() {
         // Required empty public constructor
     }
+    public void onResume() {
+        super.onResume();
 
+        // Itera sobre las tarjetas de productos y establece la cantidad a 1
+        for (int i = 0; i < productLayout.getChildCount(); i++) {
+            View productCard = productLayout.getChildAt(i);
+            EditText cantidadEditText = productCard.findViewById(R.id.cantidadProducto);
+
+            // Verifica que el EditText no sea nulo antes de intentar establecer el texto
+            if (cantidadEditText != null) {
+                cantidadEditText.setText("1");
+            }
+        }
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -141,6 +141,9 @@ public class DbHelper extends SQLiteOpenHelper {
         // Agrega la fecha actual al pedido
         values.put("fecha", ThirdFragment.obtenerFechaActual());
 
+        // Agrega el idUsuario al pedido
+        values.put("idUsuario", idUsuario);
+
         // Obtiene los datos del carrito del usuario
         String query = "SELECT * FROM " + TABLE_CARRO + " WHERE idUsuario = ?";
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(idUsuario)});
