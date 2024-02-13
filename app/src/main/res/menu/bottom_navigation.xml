@@ -5,10 +5,6 @@
         android:icon="@drawable/baseline_home_24"
         android:title="Menú"/>
     <item
-        android:id="@+id/secondFragment"
-        android:icon="@drawable/oferta"
-        android:title="Ofertas"/>
-    <item
         android:id="@+id/thirdFragment"
         android:icon="@drawable/baseline_shopping_cart_24"
         android:title="Carrito"/>
