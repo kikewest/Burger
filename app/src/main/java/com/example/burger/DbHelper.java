@@ -20,7 +20,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME="burger.db";
     private static final String TABLE_CLIENTES="clientes";
 
-    private static final String TABLE_PEDIDOS="pedidos";
+    public static final String TABLE_PEDIDOS="pedidos";
 
     private static final String TABLE_PRODUCTOS="productos";
 
@@ -108,7 +108,33 @@ public class DbHelper extends SQLiteOpenHelper {
                 values.put("contrasenia", "admin123");
                 values.put("administrador", 1); // 1 si es administrador
 
+                ContentValues values2 = new ContentValues();
+                values2.put("nombre", "Pedro");
+                values2.put("telefono", 123456789);
+                values2.put("correo", "pedro@gmail.com");
+                values2.put("domicilio", "Calle Aceituna");
+                values2.put("contrasenia", "123");
+                values2.put("administrador", 0); // 0 si no es administrador
+
+
         db.insert(TABLE_CLIENTES, null, values);
+        db.insert(TABLE_CLIENTES, null, values2);
+
+
+        insertarPedido(db, 2, "2024-01-07 20:00", "Hamburguesa de Ternera", 1, 8.99, "ternera");
+        insertarPedido(db, 2, "2024-01-07 20:00", "Helado", 1, 5.49, "fresa");
+        insertarPedido(db, 2, "2024-01-07 20:00", "Nachos con queso", 1, 3.99, "nachosconqueso");
+
+        insertarPedido(db, 2, "2024-01-14 23:20", "Hamburguesa Doble Queso", 1, 10.99, "hamburguesadoblequeso");
+
+        insertarPedido(db, 2, "2024-01-24 14:40", "Hamburguesa Doble Bacon", 1, 10.99, "hamburguesadoblequeso");
+        insertarPedido(db, 2, "2024-01-24 14:40", "Patatas Fritas", 1, 4.99, "patatasfritasperfectas");
+        insertarPedido(db, 2, "2024-01-24 14:40", "Tarta de queso", 1, 6.99, "tartadequeso");
+
+
+
+
+
 
         insertarProducto(db, "Hamburguesa de Ternera", "hamburguesas", "Deliciosa hamburguesa de ternera", 8.99, 10,"ternera");
         insertarProducto(db, "Hamburguesa Doble Queso", "hamburguesas", "Hamburguesa doble con queso", 10.99, 38,"hamburguesadoblequeso");
@@ -283,5 +309,18 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return isAdmin;
     }
+
+
+    private void insertarPedido(SQLiteDatabase db, long idUsuario, String fecha, String nombreProducto, int cantidad, double precio, String imagen) {
+        ContentValues values3 = new ContentValues();
+        values3.put("idUsuario", idUsuario);
+        values3.put("fecha", fecha);
+        values3.put("nombreProducto", nombreProducto);
+        values3.put("cantidad", cantidad);
+        values3.put("precio", precio);
+        values3.put("imagen", imagen);
+        db.insert(TABLE_PEDIDOS, null, values3);
+    }
+
 
 }

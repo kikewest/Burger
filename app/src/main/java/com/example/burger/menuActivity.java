@@ -94,6 +94,21 @@ public class menuActivity extends AppCompatActivity  {
                 return true;
             }
         });
+
+        MenuItem pedidos = lateral.getMenu().findItem(R.id.pedidos);
+        pedidos.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Log.d("MenuItemClick", "pedidos seleccionado");
+                abrirActivityPedidos();
+                return true;
+            }
+        });
+    }
+
+    private void abrirActivityPedidos() {
+        Intent intent = new Intent(this,MostrarPedidos.class);
+        startActivity(intent);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -136,11 +151,6 @@ public class menuActivity extends AppCompatActivity  {
             imagen.setVisibility(View.GONE);
             if (item.getItemId() == R.id.firstFragment) {
                 loadFragment(firstFragment);
-                imagen.setVisibility(View.GONE);
-                lateral.setVisibility(View.GONE);
-                return true;
-            } else if (item.getItemId() == R.id.secondFragment) {
-                loadFragment(secondFragment);
                 imagen.setVisibility(View.GONE);
                 lateral.setVisibility(View.GONE);
                 return true;

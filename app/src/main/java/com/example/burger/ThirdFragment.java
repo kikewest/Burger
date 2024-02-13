@@ -86,10 +86,11 @@ public class ThirdFragment extends Fragment {
         return view;
     }
     public static String obtenerFechaActual() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         Date date = new Date();
         return dateFormat.format(date);
     }
+
     private int obtenerIdUsuarioActual() {
         // Utiliza SharedPreferences para obtener el ID del usuario actual
         SharedPreferences preferences = requireContext().getSharedPreferences(LoginFragment.PREF_NAME, Context.MODE_PRIVATE);

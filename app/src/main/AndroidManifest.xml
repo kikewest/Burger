@@ -49,6 +49,8 @@
         <activity android:name=".eliminarIncidenciaActivity"></activity>
         <activity android:name=".mostrarIncidenciaActivity"></activity>
         <activity android:name=".modificarDatosPersonales" />
+        <activity android:name=".MostrarPedidos" />
+
 
     </application>
 
